@@ -22,3 +22,33 @@ visited = set()
 
 print("DFS Traversal is:")
 dfs(graph, '1', visited)
+
+***********************************************************************
+# DFS using User Input
+
+def dfs(graph, node, visited):
+
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
+
+        for i in graph[node]:
+            dfs(graph, i, visited)
+
+graph = {}
+
+n = int(input("Enter number of nodes: "))
+
+for i in range(n):
+
+    node = input("Enter node: ")
+    neighbours = input("Enter neighbours separated by space: ").split()
+
+    graph[node] = neighbours
+
+start = input("Enter starting node: ")
+
+visited = set()
+
+print("DFS Traversal is:")
+dfs(graph, start, visited)
