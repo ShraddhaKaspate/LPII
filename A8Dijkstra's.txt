@@ -3,19 +3,7 @@
 
 # -------- Kruskal's Algorithm --------
 
-edges = [
-    (2, 'A', 'B'),
-    (3, 'B', 'C'),
-    (6, 'A', 'D'),
-    (8, 'B', 'D')
-]
 
-edges.sort()
-
-print("Kruskal's MST")
-
-for edge in edges[:3]:
-    print(edge[1], "-", edge[2], ":", edge[0])
 
 # -------- Dijkstra's Algorithm --------
 
