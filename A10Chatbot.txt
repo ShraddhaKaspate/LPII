@@ -1,0 +1,29 @@
+# Customer Service Chatbot
+
+print("----- Welcome to Chatbot -----")
+
+while True:
+
+    msg = input("You: ").lower()
+
+    if msg == "hello":
+        print("Bot: Hello! How can I help you?")
+
+    elif msg == "product":
+        print("Bot: We have mobiles, laptops and headphones.")
+
+    elif msg == "price":
+        print("Bot: Prices start from 500 Rs.")
+
+    elif msg == "delivery":
+        print("Bot: Delivery will take 2 to 3 days.")
+
+    elif msg == "contact":
+        print("Bot: Call us at 9876543210")
+
+    elif msg == "bye":
+        print("Bot: Thank you for visiting!")
+        break
+
+    else:
+        print("Bot: Sorry, please try another question.")

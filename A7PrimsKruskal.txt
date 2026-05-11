@@ -1,0 +1,50 @@
+# Greedy Algorithm
+# Prim's and Kruskal's MST
+
+# -------- Prim's Algorithm --------
+
+graph = [
+    [0, 2, 0, 6],
+    [2, 0, 3, 8],
+    [0, 3, 0, 0],
+    [6, 8, 0, 0]
+]
+
+selected = [False] * 4
+selected[0] = True
+
+print("Prim's MST")
+
+for i in range(3):
+
+    minimum = 999
+    x = 0
+    y = 0
+
+    for a in range(4):
+        if selected[a]:
+            for b in range(4):
+                if (not selected[b]) and graph[a][b]:
+                    if minimum > graph[a][b]:
+                        minimum = graph[a][b]
+                        x = a
+                        y = b
+
+    print(x, "-", y, ":", graph[x][y])
+    selected[y] = True
+
+# -------- Kruskal's Algorithm --------
+
+edges = [
+    (2, 'A', 'B'),
+    (3, 'B', 'C'),
+    (6, 'A', 'D'),
+    (8, 'B', 'D')
+]
+
+edges.sort()
+
+print("\nKruskal's MST")
+
+for edge in edges[:3]:
+    print(edge[1], "-", edge[2], ":", edge[0])

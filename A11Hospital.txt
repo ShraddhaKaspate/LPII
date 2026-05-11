@@ -1,0 +1,72 @@
+# Simple Medical Expert System
+
+def medical_expert_system():
+
+    print("🏥 Welcome to Medical Expert System")
+    print("Answer the following questions with 'yes' or 'no'\n")
+
+    # User inputs
+    fever = input("Do you have fever? ").lower()
+
+    cough = input("Do you have cough? ").lower()
+
+    headache = input("Do you have headache? ").lower()
+
+    stomach_pain = input("Do you have stomach pain? ").lower()
+
+    fatigue = input("Do you feel fatigue? ").lower()
+
+    print("\n📋 Diagnosis Result:\n")
+
+    # Rule-based decisions
+
+    if fever == "yes" and cough == "yes" and fatigue == "yes":
+
+        print("➡ Possible Disease: Flu / Viral Infection")
+
+        print("👨‍⚕ Consult: General Physician")
+
+        print("💡 Advice: Rest, hydration, and medication")
+
+
+    elif fever == "yes" and headache == "yes":
+
+        print("➡ Possible Disease: Migraine or Viral Fever")
+
+        print("👨‍⚕ Consult: Neurologist / General Physician")
+
+        print("💡 Advice: Take rest and avoid stress")
+
+
+    elif stomach_pain == "yes":
+
+        print("➡ Possible Disease: Gastric Issue / Food Poisoning")
+
+        print("👨‍⚕ Consult: Gastroenterologist")
+
+        print("💡 Advice: Avoid outside food and stay hydrated")
+
+
+    elif fatigue == "yes" and fever != "yes":
+
+        print("➡ Possible Condition: Weakness / Stress")
+
+        print("👨‍⚕ Consult: General Physician")
+
+        print("💡 Advice: Proper diet and sleep")
+
+
+    else:
+
+        print("➡ Condition unclear")
+
+        print("👨‍⚕ Please consult a doctor for proper diagnosis")
+
+
+    # Disclaimer
+    print("\n⚠ Disclaimer:")
+    print("This is a basic expert system and not a real medical diagnosis.")
+
+
+# Run the system
+medical_expert_system()

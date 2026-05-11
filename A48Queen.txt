@@ -1,0 +1,24 @@
+# Simple 8 Puzzle Problem
+
+start = [1, 2, 3,
+         4, 0, 5,
+         6, 7, 8]
+
+goal = [1, 2, 3,
+        4, 5, 0,
+        6, 7, 8]
+
+# Display puzzle
+def show(state):
+    for i in range(0, 9, 3):
+        print(state[i], state[i+1], state[i+2])
+
+# Check goal state
+if start == goal:
+    print("Goal Reached")
+else:
+    print("Initial State:")
+    show(start)
+
+    print("\nGoal State:")
+    show(goal)

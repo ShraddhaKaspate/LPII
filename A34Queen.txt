@@ -1,0 +1,25 @@
+# 4 Queens Problem
+
+N = 4
+board = [-1] * N
+
+# Check safe position
+def check(row, col):
+    for i in range(row):
+        if board[i] == col or abs(board[i] - col) == abs(i - row):
+            return False
+    return True
+
+# Solve function
+def queen(row):
+    if row == N:
+        for i in range(N):
+            print(board[i], end=" ")
+        return
+
+    for col in range(N):
+        if check(row, col):
+            board[row] = col
+            queen(row + 1)
+
+queen(0)

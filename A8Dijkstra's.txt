@@ -1,0 +1,54 @@
+# Greedy Algorithm
+# Kruskal's Algorithm and Dijkstra's Algorithm
+
+# -------- Kruskal's Algorithm --------
+
+edges = [
+    (2, 'A', 'B'),
+    (3, 'B', 'C'),
+    (6, 'A', 'D'),
+    (8, 'B', 'D')
+]
+
+edges.sort()
+
+print("Kruskal's MST")
+
+for edge in edges[:3]:
+    print(edge[1], "-", edge[2], ":", edge[0])
+
+# -------- Dijkstra's Algorithm --------
+
+graph = {
+    'A': {'B': 1, 'C': 4},
+    'B': {'C': 2, 'D': 5},
+    'C': {'D': 1},
+    'D': {}
+}
+
+distance = {'A': 0, 'B': 999, 'C': 999, 'D': 999}
+visited = []
+
+current = 'A'
+
+while current:
+    visited.append(current)
+
+    for neighbour in graph[current]:
+        new_dist = distance[current] + graph[current][neighbour]
+
+        if new_dist < distance[neighbour]:
+            distance[neighbour] = new_dist
+
+    next_node = None
+    min_dist = 999
+
+    for node in distance:
+        if node not in visited and distance[node] < min_dist:
+            min_dist = distance[node]
+            next_node = node
+
+    current = next_node
+
+print("\nShortest Distance:")
+print(distance)
