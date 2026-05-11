@@ -3,6 +3,8 @@
 
 # -------- Single Source Shortest Path --------
 
+# Single Source Shortest Path (Greedy)
+
 graph = {
     'A': {'B': 1, 'C': 4},
     'B': {'C': 2, 'D': 5},
@@ -11,26 +13,29 @@ graph = {
 }
 
 distance = {'A': 0, 'B': 999, 'C': 999, 'D': 999}
+
 visited = []
 
 current = 'A'
 
 while current:
+
     visited.append(current)
 
-    for neighbour in graph[current]:
-        new_dist = distance[current] + graph[current][neighbour]
+    for n in graph[current]:
 
-        if new_dist < distance[neighbour]:
-            distance[neighbour] = new_dist
+        new_dist = distance[current] + graph[current][n]
+
+        if new_dist < distance[n]:
+            distance[n] = new_dist
 
     next_node = None
     min_dist = 999
 
-    for node in distance:
-        if node not in visited and distance[node] < min_dist:
-            min_dist = distance[node]
-            next_node = node
+    for i in distance:
+        if i not in visited and distance[i] < min_dist:
+            min_dist = distance[i]
+            next_node = i
 
     current = next_node
 
