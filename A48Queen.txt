@@ -1,4 +1,4 @@
-# Simple 8 Puzzle Problem
+# Simple A* for 8 Puzzle
 
 start = [1, 2, 3,
          4, 0, 5,
@@ -13,12 +13,27 @@ def show(state):
     for i in range(0, 9, 3):
         print(state[i], state[i+1], state[i+2])
 
-# Check goal state
-if start == goal:
+# Heuristic function
+def heuristic(state):
+
+    count = 0
+
+    for i in range(9):
+
+        if state[i] != goal[i]:
+            count += 1
+
+    return count
+
+print("Initial State:")
+show(start)
+
+print("\nGoal State:")
+show(goal)
+
+print("\nHeuristic Value:", heuristic(start))
+
+if heuristic(start) == 0:
     print("Goal Reached")
 else:
-    print("Initial State:")
-    show(start)
-
-    print("\nGoal State:")
-    show(goal)
+    print("Goal Not Reached")
