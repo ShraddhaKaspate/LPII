@@ -31,20 +31,20 @@ selected[0] = True
 
 print("\nMST Edges : Weight")
 
-for i in range(3):
+for k in range(3):
 
     minimum = 999
     x = 0
     y = 0
 
-    for a in range(4):
-        if selected[a]:
-            for b in range(4):
-                if (not selected[b]) and graph[a][b]:
-                    if minimum > graph[a][b]:
-                        minimum = graph[a][b]
-                        x = a
-                        y = b
+    for i in range(4):
+        if selected[i]:
+            for j in range(4):
+                if (not selected[j]) and graph[i][j]:
+                    if minimum > graph[i][j]:
+                        minimum = graph[i][j]
+                        x = i
+                        y = j
 
-    print(x, "-", y, ":", graph[x][y])
+    print(x, "-", y, ":", graph[i][j])
     selected[y] = True
