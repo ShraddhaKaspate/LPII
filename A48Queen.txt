@@ -1,39 +1,56 @@
-# Simple A* for 8 Puzzle
+# Simple A* Algorithm
 
-start = [1, 2, 3,
-         4, 0, 5,
-         6, 7, 8]
+import heapq
 
-goal = [1, 2, 3,
-        4, 5, 0,
-        6, 7, 8]
+# Heuristic Function
+def heuristic(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-# Display puzzle
-def show(state):
-    for i in range(0, 9, 3):
-        print(state[i], state[i+1], state[i+2])
+# A* Function
+def astar(grid, start, goal):
 
-# Heuristic function
-def heuristic(state):
+    queue = []
+    heapq.heappush(queue, (0, start))
 
-    count = 0
+    visited = []
 
-    for i in range(9):
+    while queue:
 
-        if state[i] != goal[i]:
-            count += 1
+        cost, current = heapq.heappop(queue)
 
-    return count
+        if current == goal:
+            print("Goal Reached")
+            return
 
-print("Initial State:")
-show(start)
+        if current not in visited:
 
-print("\nGoal State:")
-show(goal)
+            print(current)
 
-print("\nHeuristic Value:", heuristic(start))
+            visited.append(current)
 
-if heuristic(start) == 0:
-    print("Goal Reached")
-else:
-    print("Goal Not Reached")
+            x, y = current
+
+            moves = [(x+1,y), (x-1,y), (x,y+1), (x,y-1)]
+
+            for nx, ny in moves:
+
+                if 0 <= nx < 4 and 0 <= ny < 4:
+
+                    if grid[nx][ny] == 0:
+
+                        h = heuristic((nx, ny), goal)
+
+                        heapq.heappush(queue, (h, (nx, ny)))
+
+# Grid
+grid = [
+    [0, 0, 0, 0],
+    [1, 1, 0, 1],
+    [0, 0, 0, 0],
+    [0, 1, 1, 0]
+]
+
+start = (0, 0)
+goal = (3, 3)
+
+astar(grid, start, goal)
