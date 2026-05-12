@@ -1,0 +1,340 @@
+AI 1. Implement Depth First Search algorithm. Use an undirected graph and develop a recursive algorithm for searching all the vertices of a graph or tree data structure.
+-------------------------------------------------------------------------------------------------------
+--------------
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B', 'F'],
+    'F': ['C', 'E']
+}
+visited = set()
+def dfs(node):
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
+        for neighbor in graph[node]:
+            dfs(neighbor)
+dfs('A')
+------------------------------------------------------------------------------------------------------------------------
+
+AI 2. Implement Breadth First Search algorithm.
+graph = {
+    1: [2, 3],
+    2: [1, 4, 5],
+    3: [1],
+    4: [2],
+    5: [2]
+}
+visited = []
+queue = []
+def bfs(node):
+    visited.append(node)
+    queue.append(node)
+    while queue:
+        s = queue.pop(0)
+        print(s, end=" ")
+        for i in graph[s]:
+            if i not in visited:
+                visited.append(i)
+                queue.append(i)
+bfs(1)
+-----------------------------------------------------------------------------------------------------------------------------
+AI 3. - Simple 4-Queens using A* idea
+
+import heapq
+def safe(board, row, col):
+    for r in range(row):
+        c = board[r]
+        if c == col or abs(c - col) == abs(r - row):
+            return False
+    return True
+def astar():
+    pq = []
+    heapq.heappush(pq, (0, []))
+    while pq:
+        cost, board = heapq.heappop(pq)
+        row = len(board)
+        if row == 4:
+            return board
+        for col in range(4):
+            if safe(board, row, col):
+                new_board = board + [col]
+                heapq.heappush(pq, (len(new_board), new_board))
+answer = astar()
+print("Queen Positions:", answer)
+-----------------------------------------------------------------------------------------------------------------------------------
+AI 4. Implement A star Algorithm for 8-Puzzle problem.
+import heapq
+def safe(board, row, col):
+    for r in range(row):
+        c = board[r]
+        if c == col or abs(c - col) == abs(r - row):
+            return False
+    return True
+def astar():
+    pq = []
+    heapq.heappush(pq, (0, []))
+    while pq:
+        cost, board = heapq.heappop(pq)
+        row = len(board)
+        # Goal condition
+        if row == 8:
+            return board
+        for col in range(8):
+            if safe(board, row, col):
+                new_board = board + [col]
+                heapq.heappush(pq, (len(new_board), new_board))
+answer = astar()
+print("Queen Positions:", answer)
+--------------------------------------------------------------------------------------------------------------------------
+AI 5. Implement Greedy search algorithm for following application Selection Sort &amp;Minimum Spanning Tree.
+# Selection Sort
+arr = [64, 25, 12, 22, 11]
+for i in range(len(arr)):
+    min_index = i
+    for j in range(i + 1, len(arr)):
+        if arr[j] < arr[min_index]:
+            min_index = j
+    arr[i], arr[min_index] = arr[min_index], arr[i]
+print("Sorted Array:", arr)
+---------------------------------
+# Prim's MST
+graph = {
+    'A': {'B': 2, 'C': 3},
+    'B': {'A': 2, 'C': 1, 'D': 1},
+    'C': {'A': 3, 'B': 1, 'D': 4},
+    'D': {'B': 1, 'C': 4}
+}
+visited = []
+visited.append('A')
+while len(visited) < len(graph):
+    min_edge = 999
+    x = y = ''
+    for i in visited:
+        for j in graph[i]:
+            if j not in visited and graph[i][j] < min_edge:
+                min_edge = graph[i][j]
+                x = i
+                y = j
+    print(x, "-", y, "=", min_edge)
+    visited.append(y)
+-----------------------------------------------------------------------------------------------------------------------
+AI 6. Implement Greedy search algorithm for the following application - Single-SourceShortest Path Problem &amp; Job Scheduling Problem.
+# Dijkstra
+graph = {
+    'A': {'B': 2, 'C': 4},
+    'B': {'C': 1, 'D': 7},
+    'C': {'D': 3},
+    'D': {}
+}
+distance = {'A': 0, 'B': 999, 'C': 999, 'D': 999}
+visited = []
+while len(visited) < 4:
+    min_node = ''
+    for node in distance:
+        if node not in visited:
+            if min_node == '' or distance[node] < distance[min_node]:
+                min_node = node
+    visited.append(min_node)
+    for n in graph[min_node]:
+        if distance[min_node] + graph[min_node][n] < distance[n]:
+            distance[n] = distance[min_node] + graph[min_node][n]
+print(distance)
+---------------------------------------
+# Job Scheduling
+jobs = [
+    ['A', 2, 100],
+    ['B', 1, 50],
+    ['C', 2, 20]
+]
+jobs.sort(key=lambda x: x[2], reverse=True)
+time = [0, 0]
+answer = []
+for job in jobs:
+    for j in range(job[1] - 1, -1, -1):
+        if time[j] == 0:
+            time[j] = 1
+            answer.append(job[0])
+            break
+print(answer)
+--------------------------------------------------------------------------------------------------------------------------
+AI 7. Implement Greedy search algorithm for the following application Prim&#39;s Minimal
+Spanning Tree Algorithm &amp; Kruskal&#39;s Minimal Spanning Tree Algorithm.
+#  Prim's Algorithm
+graph = {
+    0: [1, 2],
+    1: [0, 2, 3],
+    2: [0, 1, 3],
+    3: [1, 2]
+}
+cost = {
+    (0,1): 2,
+    (0,2): 3,
+    (1,2): 1,
+    (1,3): 1,
+    (2,3): 4
+}
+visited = [0]
+while len(visited) < 4:
+    min_cost = 999
+    for i in visited:
+        for j in graph[i]:
+            if j not in visited:
+                c = cost.get((i,j), cost.get((j,i)))
+                if c < min_cost:
+                    min_cost = c
+                    a = i
+                    b = j
+    print(a, "-", b, "=", min_cost)
+    visited.append(b)
+
+# Kruskal Algorithm
+edges = [
+    [1, 1, 2],
+    [2, 0, 1],
+    [3, 0, 2],
+    [1, 1, 3],
+    [4, 2, 3]
+]
+parent = [0,1,2,3]
+def find(x):
+    while parent[x] != x:
+        x = parent[x]
+    return x
+edges.sort()
+for w, u, v in edges:
+    if find(u) != find(v):
+        print(u, "-", v, "=", w)
+        parent[find(u)] = find(v)
+----------------------------------------------------------------------------------------------------------------------------
+AI 8. Implement Greedy search algorithm for the following application Kruskas Minimal
+Spanning Tree Algorithm &amp; Dijkstra;s Minimal Spanning Tree Algorithm
+#  Kruskal Algorithm
+edges = [
+    [1, 'A', 'B'],
+    [3, 'A', 'C'],
+    [1, 'B', 'C'],
+    [1, 'B', 'D'],
+    [4, 'C', 'D']
+]
+parent = {}
+nodes = ['A', 'B', 'C', 'D']
+for n in nodes:
+    parent[n] = n
+def find(x):
+    while parent[x] != x:
+        x = parent[x]
+    return x
+edges.sort()
+for w, u, v in edges:
+    if find(u) != find(v):
+        print(u, "-", v, "=", w)
+        parent[find(u)] = find(v)
+#  Dijkstra Algorithm
+graph = {
+    'A': {'B': 2, 'C': 4},
+    'B': {'C': 1, 'D': 7},
+    'C': {'D': 3},
+    'D': {}
+}
+distance = {
+    'A': 0,
+    'B': 999,
+    'C': 999,
+    'D': 999
+}
+visited = []
+while len(visited) < 4:
+    min_node = ''
+    for node in distance:
+        if node not in visited:
+            if min_node == '' or distance[node] < distance[min_node]:
+                min_node = node
+    visited.append(min_node)
+    for n in graph[min_node]:
+        new = distance[min_node] + graph[min_node][n]
+        if new < distance[n]:
+            distance[n] = new
+print(distance)
+---------------------------------------------------------------------------------------------------------------------------
+AI 9. Implement a solution for a Constraint Satisfaction Problem using Branch and Bound and Backtracking for n-queen’s problem or a graph coloring problem.
+#  N-Queens using Backtracking
+N = 4
+board = [-1] * N
+def safe(row, col):
+    for i in range(row):
+        if board[i] == col or abs(board[i] - col) == abs(i - row):
+            return False
+    return True
+def solve(row):
+    if row == N:
+        print(board)
+        return
+    for col in range(N):
+        if safe(row, col):
+            board[row] = col
+            solve(row + 1)
+solve(0)
+# Graph Coloring
+graph = {
+    0: [1, 2],
+    1: [0, 2, 3],
+    2: [0, 1, 3],
+    3: [1, 2]
+}
+color = {}
+colors = ["Red", "Green", "Blue"]
+def safe(node, c):
+    for neighbor in graph[node]:
+        if neighbor in color and color[neighbor] == c:
+            return False
+    return True
+def solve(node):
+    if node == len(graph):
+        print(color)
+        return
+    for c in colors:
+        if safe(node, c):
+            color[node] = c
+            solve(node + 1)
+            del color[node]
+solve(0)
+----------------------------------------------------------------------------------------------------------------------------------
+
+AI 10. Develop an elementary chatbot for any suitable customer interaction application.
+#  Customer Chatbot
+print("Chatbot: Hello! Welcome to our shop.")
+print("Type 'bye' to exit.")
+while True:
+    user = input("You: ").lower()
+    if user == "hello":
+        print("Chatbot: Hi! How can I help you?")
+    elif user == "price":
+        print("Chatbot: Prices start from 500 rupees.")
+    elif user == "product":
+        print("Chatbot: We have mobiles, laptops and headphones.")
+    elif user == "delivery":
+        print("Chatbot: Delivery takes 3 to 5 days.")
+    elif user == "bye":
+        print("Chatbot: Thank you! Visit again.")
+        break
+    else:
+        print("Chatbot: Sorry, I don't understand.")
+------------------------------------------------------------------------------------------------------------------------------------------
+
+AI 11. Implement any one of the following Expert System
+Medical Expert System
+print("Medical Expert System")
+fever = input("Do you have fever? (yes/no): ")
+cough = input("Do you have cough? (yes/no): ")
+headache = input("Do you have headache? (yes/no): ")
+if fever == "yes" and cough == "yes":
+    print("You may have Flu.")
+elif fever == "yes" and headache == "yes":
+    print("You may have Viral Infection.")
+elif cough == "yes":
+    print("You may have Cold.")
+else:
+    print("You seem healthy.")
